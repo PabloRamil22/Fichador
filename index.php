@@ -57,7 +57,7 @@ $fichajes = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 <body>
     <div class="container mt-5">
-        <a href="index.php" class="text-decoration-none text-dark">
+        <a href="index" class="text-decoration-none text-dark">
             <h1 class="text-center mb-4">Fichador 3000</h1>
         </a>
 
@@ -66,7 +66,7 @@ $fichajes = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <div class="row justify-content-center">
             <div class="col-md-8 col-lg-6">
 
-                <!-- Formulario de Inicio de Sesión -->
+                
                 <div class="card mb-4 shadow-sm">
                     <div class="card-body">
                         <h5 class="card-title text-center">Registro</h5>
@@ -85,7 +85,7 @@ $fichajes = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 </div>
 
                 <?php if ($user) : ?>
-                    <!-- Formulario de Registro de Fichaje -->
+                    
                     <div class="card mb-4 shadow-sm">
                         <div class="card-body">
                             <h5 class="card-title text-center">Registrar Fichaje</h5>
@@ -105,7 +105,7 @@ $fichajes = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     </div>
                 <?php endif; ?>
 
-                <!-- Formulario de Búsqueda -->
+                
                 <div class="card mb-4 shadow-sm">
                     <div class="card-body">
                         <h5 class="card-title text-center">Buscador</h5>
@@ -119,10 +119,10 @@ $fichajes = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     </div>
                 </div>
 
-                <!-- Tabla de Resultados -->
+                
                 <div class="card shadow-sm">
                     <div class="card-body">
-                        <h5 class="card-title text-center">Resultados de Fichajes</h5>
+                        <h5 class="card-title text-center">Fichajes</h5>
                         <table class="table table-striped table-hover mt-3">
                             <thead class="table-dark">
                                 <tr>
