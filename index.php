@@ -70,9 +70,6 @@ $fichajes = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="assets/css/index.css">
     <title>Fichador 3000</title>
-</head>
-
-<body>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap');
 
@@ -129,8 +126,9 @@ $fichajes = $stmt->fetchAll(PDO::FETCH_ASSOC);
             border-color: #28a745;
         }
     </style>
+</head>
 
-
+<body>
     <div class="container mt-5">
         <a href="index" class="text-decoration-none">
             <h1 class="text-center mb-4">Fichador 3000</h1>
@@ -179,24 +177,17 @@ $fichajes = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     </div>
                 <?php endif; ?>
 
-                <!-- Formulario de Buscador -->
-                <div class="card mb-4 shadow-sm">
-                    <div class="card-body">
-                        <h5 class="card-title text-center">Buscador</h5>
-                        <form action="" method="post">
-                            <div class="mb-3">
-                                <label for="search_name" class="form-label">Nombre</label>
-                                <input type="text" class="form-control" id="search_name" name="search_name" value="<?php echo htmlspecialchars($searchName); ?>">
-                            </div>
-                            <button type="submit" class="btn btn-primary w-100">Buscar</button>
-                        </form>
-                    </div>
-                </div>
-
                 <!-- Tabla de Fichajes -->
                 <div class="card shadow-sm">
                     <div class="card-body">
                         <h5 class="card-title text-center">Fichajes</h5>
+                        <!-- Formulario de Buscador dentro de la tabla -->
+                        <form action="" method="post" class="mb-4">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Buscar por nombre" name="search_name" value="<?php echo htmlspecialchars($searchName); ?>">
+                                <button class="btn btn-primary" type="submit">Buscar</button>
+                            </div>
+                        </form>
                         <table class="table table-striped table-hover mt-3">
                             <thead class="table-dark">
                                 <tr>
@@ -219,7 +210,6 @@ $fichajes = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         </table>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
