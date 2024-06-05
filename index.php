@@ -74,7 +74,7 @@ $fichajes = $stmt->fetchAll(PDO::FETCH_ASSOC);
         @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap');
 
         body {
-            background-image: url('assets/img/fondo.jpg');
+            background-image: url('assets/img/fondo2.jpg');
             background-size: cover;
             background-position: center;
             height: 100vh;
@@ -120,6 +120,20 @@ $fichajes = $stmt->fetchAll(PDO::FETCH_ASSOC);
         .btn-success {
             background-color: #28a745;
             border-color: #28a745;
+        }
+        footer {
+            background-color: #343a40;
+            color: #ffffff;
+            padding: 20px 0;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 14px;
         }
     </style>
 </head>
@@ -209,6 +223,8 @@ $fichajes = $stmt->fetchAll(PDO::FETCH_ASSOC);
             </div>
         </div>
     </div>
+
+
 
     <!-- Scripts de Bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-cVEBBL62nYIWdFZLkAnm7Bj/6WrWc5Eufl+R8q6rhzjtZYNwGx6vp1Wm8lWl9EPG" crossorigin="anonymous"></script>
