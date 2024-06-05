@@ -4,6 +4,8 @@ include("conexion.php");
 $user = null;
 $alertMessage = '';
 
+
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST['dni'], $_POST['pass'])) {
         $dni = $_POST['dni'];
@@ -32,17 +34,32 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 
+
+//Buscador
 $searchName = '';
 if (isset($_POST['search_name'])) {
     $searchName = $_POST['search_name'];
-    $stmt = $conn->prepare("SELECT user.nombre, fichaje.hora_dia, fichaje.estado FROM fichaje INNER JOIN user ON fichaje.iduser = user.iduser WHERE user.nombre LIKE :nombre");
+    $stmt = $conn->prepare("
+        SELECT user.nombre, fichaje.hora_dia, fichaje.estado 
+        FROM fichaje 
+        INNER JOIN user ON fichaje.iduser = user.iduser 
+        WHERE user.nombre LIKE :nombre 
+        AND fichaje.hora_dia >= NOW() - INTERVAL 1 DAY
+    ");
     $stmt->execute([':nombre' => '%' . $searchName . '%']);
 } else {
-    $stmt = $conn->prepare("SELECT user.nombre, fichaje.hora_dia, fichaje.estado FROM fichaje INNER JOIN user ON fichaje.iduser = user.iduser");
+    $stmt = $conn->prepare("
+        SELECT user.nombre, fichaje.hora_dia, fichaje.estado 
+        FROM fichaje 
+        INNER JOIN user ON fichaje.iduser = user.iduser 
+        WHERE fichaje.hora_dia >= NOW() - INTERVAL 1 DAY
+    ");
     $stmt->execute();
 }
 $fichajes = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
+
+
 
 <!DOCTYPE html>
 <html lang="es">
@@ -51,13 +68,71 @@ $fichajes = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" href="assets/index.css">
+    <link rel="stylesheet" href="assets/css/index.css">
     <title>Fichador 3000</title>
 </head>
 
 <body>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap');
+
+        body {
+            background-image: url('assets/img/fondo.jpg');
+            background-size: cover;
+            background-position: center;
+
+        }
+
+        h1 {
+            color: #f8f9fa;
+            /* Un blanco suave */
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
+            /* Sombra sutil */
+            font-family: 'Roboto', sans-serif;
+            /* Fuente moderna de Google Fonts */
+            font-size: 3.5rem;
+            /* Tamaño de fuente mayor */
+            text-align: center;
+            margin-bottom: 1.5rem;
+            /* Espacio adicional debajo */
+            border-bottom: 2px solid #343a40;
+            /* Borde inferior de color gris oscuro */
+            padding-bottom: 0.5rem;
+            /* Espacio debajo del texto */
+        }
+
+
+        .table {
+            margin-top: 20px;
+        }
+
+        label {
+            width: 100px;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .btn-primary {
+            background-color: gray;
+            border-color: gray;
+        }
+
+        .btn-danger {
+            background-color: #dc3545;
+            border-color: #dc3545;
+        }
+
+        .btn-success {
+            background-color: #28a745;
+            border-color: #28a745;
+        }
+    </style>
+
+
     <div class="container mt-5">
-        <a href="index" class="text-decoration-none text-dark">
+        <a href="index" class="text-decoration-none">
             <h1 class="text-center mb-4">Fichador 3000</h1>
         </a>
 
@@ -65,8 +140,7 @@ $fichajes = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         <div class="row justify-content-center">
             <div class="col-md-8 col-lg-6">
-
-                
+                <!-- Formulario de Registro -->
                 <div class="card mb-4 shadow-sm">
                     <div class="card-body">
                         <h5 class="card-title text-center">Registro</h5>
@@ -84,8 +158,8 @@ $fichajes = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     </div>
                 </div>
 
+                <!-- Formulario de Registrar Fichaje -->
                 <?php if ($user) : ?>
-                    
                     <div class="card mb-4 shadow-sm">
                         <div class="card-body">
                             <h5 class="card-title text-center">Registrar Fichaje</h5>
@@ -105,7 +179,7 @@ $fichajes = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     </div>
                 <?php endif; ?>
 
-                
+                <!-- Formulario de Buscador -->
                 <div class="card mb-4 shadow-sm">
                     <div class="card-body">
                         <h5 class="card-title text-center">Buscador</h5>
@@ -119,7 +193,7 @@ $fichajes = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     </div>
                 </div>
 
-                
+                <!-- Tabla de Fichajes -->
                 <div class="card shadow-sm">
                     <div class="card-body">
                         <h5 class="card-title text-center">Fichajes</h5>
@@ -149,6 +223,9 @@ $fichajes = $stmt->fetchAll(PDO::FETCH_ASSOC);
             </div>
         </div>
     </div>
+
+    <!-- Scripts de Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-cVEBBL62nYIWdFZLkAnm7Bj/6WrWc5Eufl+R8q6rhzjtZYNwGx6vp1Wm8lWl9EPG" crossorigin="anonymous"></script>
 </body>
 
 </html>
