@@ -77,25 +77,21 @@ $fichajes = $stmt->fetchAll(PDO::FETCH_ASSOC);
             background-image: url('assets/img/fondo.jpg');
             background-size: cover;
             background-position: center;
-
+            height: 100vh;
+            margin: 0;
+            padding: 0;
         }
+
 
         h1 {
             color: #e49800;
-            /* Un blanco suave */
             text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
-            /* Sombra sutil */
             font-family: 'Roboto', sans-serif;
-            /* Fuente moderna de Google Fonts */
             font-size: 3.5rem;
-            /* Tamaño de fuente mayor */
             text-align: center;
             margin-bottom: 1.5rem;
-            /* Espacio adicional debajo */
             border-bottom: 2px solid #343a40;
-            /* Borde inferior de color gris oscuro */
             padding-bottom: 0.5rem;
-            /* Espacio debajo del texto */
         }
 
 
