@@ -44,7 +44,7 @@ if (isset($_POST['search_name'])) {
         FROM fichaje 
         INNER JOIN user ON fichaje.iduser = user.iduser 
         WHERE user.nombre LIKE :nombre 
-        AND fichaje.hora_dia >= NOW() - INTERVAL 1 DAY
+        AND fichaje.hora_dia >= NOW() - INTERVAL 18 HOUR
     ");
     $stmt->execute([':nombre' => '%' . $searchName . '%']);
 } else {
@@ -52,7 +52,7 @@ if (isset($_POST['search_name'])) {
         SELECT user.nombre, fichaje.hora_dia, fichaje.estado 
         FROM fichaje 
         INNER JOIN user ON fichaje.iduser = user.iduser 
-        WHERE fichaje.hora_dia >= NOW() - INTERVAL 1 DAY
+        WHERE fichaje.hora_dia >= NOW() - INTERVAL 18 HOUR
     ");
     $stmt->execute();
 }
@@ -81,7 +81,7 @@ $fichajes = $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
 
         h1 {
-            color: #f8f9fa;
+            color: #e49800;
             /* Un blanco suave */
             text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
             /* Sombra sutil */
